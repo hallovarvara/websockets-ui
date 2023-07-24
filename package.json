@@ -5,8 +5,10 @@
     "main": "index.ts",
     "type": "commonjs",
     "scripts": {
-        "start": "tsc && node dist/index.js",
-        "start:dev": "nodemon index.ts"
+        "start": "ts-node -r tsconfig-paths/register ./index.ts",
+        "start:dev": "nodemon -r tsconfig-paths/register ./index.ts",
+        "start:prod": "npm run build && node dist",
+        "build": "webpack"
     },
     "author": "Varvara Deviaterikova <hallovarvara@gmail.com>",
     "keywords": [],
@@ -15,7 +17,10 @@
         "@types/ws": "^8.5.5",
         "nodemon": "^2.0.16",
         "prettier": "^3.0.0",
-        "ts-node": "^10.9.1"
+        "ts-loader": "^9.4.4",
+        "ts-node": "^10.9.1",
+        "tsconfig-paths": "^4.2.0",
+        "webpack": "^5.88.2"
     },
     "dependencies": {
         "dotenv": "^16.3.1",
