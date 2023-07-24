@@ -7,6 +7,11 @@ import { updateRoom } from '@/lib/modules/update-room';
 import { getRoomsResponse } from '@/lib/responses/get-rooms-response';
 import { finishGame } from '@/lib/modules/finish-game';
 import { registerUser } from '@/lib/modules/register-user';
+import { createRoom } from '@/lib/modules/create-room';
+import { createGame } from '@/lib/modules/create-game';
+import { addShips } from '@/lib/modules/add-ships';
+import { attack } from '@/lib/modules/attack';
+import { createGameSinglePlayer } from '@/lib/modules/create-game-single-player';
 import { getErrorResponse } from '@/lib/responses/get-error-response';
 import { stringify } from '@/lib/utils/stringify';
 import { isClientValid } from '@/lib/utils/is-client-valid';
@@ -40,6 +45,32 @@ export class WebSocketChild {
     switch (response.type) {
       case DataTypeEnum.UserRegister: {
         registerUser({ response, wsClient });
+        break;
+      }
+
+      case DataTypeEnum.RoomCreate: {
+        createRoom({ response, wsClient, wsServer });
+        break;
+      }
+
+      case DataTypeEnum.UserAddToRoom: {
+        createGame({ response, wsClient, wsServer });
+        break;
+      }
+
+      case DataTypeEnum.ShipsAdd: {
+        addShips({ response, wsClient, wsServer });
+        break;
+      }
+
+      case DataTypeEnum.Attack:
+      case DataTypeEnum.AttackRandom: {
+        attack({ response, wsClient, wsServer });
+        break;
+      }
+
+      case DataTypeEnum.SinglePlay: {
+        createGameSinglePlayer(wsClient);
         break;
       }
 
