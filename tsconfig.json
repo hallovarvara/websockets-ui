@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+    },
     "target": "es6",
     "module": "commonjs",
     "resolveJsonModule": true,
@@ -10,5 +14,7 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ]
 }
